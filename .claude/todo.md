@@ -3,7 +3,7 @@
 Plano vivo do projeto. Tarefas e subtarefas, marcadas conforme concluídas.
 
 ## Em progresso
-- [ ] Máquina estatística (OLS Newey-West, GRS, Fama-MacBeth, métricas)
+- [ ] Módulos empíricos (SML achatada, valor, tamanho, alfas+GRS, 3 fatores, momentum, BAB)
 
 ## Próximas
 - [ ] Módulos empíricos (SML achatada, valor, tamanho, alfas+GRS, 3 fatores, momentum, BAB)
@@ -17,3 +17,5 @@ Plano vivo do projeto. Tarefas e subtarefas, marcadas conforme concluídas.
 - [x] Confirmar fonte de dados (Ken French) e acesso de rede
 - [x] Setup inicial do projeto
 - [x] Data loader da biblioteca Ken French (download + cache, parser robusto, deciles D1..D10)
+- [x] Máquina estatística (OLS Newey-West, teste GRS, Fama-MacBeth, métricas de performance)
+  validada: alfa de valor +6%/yr t=3.1; GRS CAPM rejeita B/M (p=0.02), 3F não (p=0.26); SML achatada via FM
