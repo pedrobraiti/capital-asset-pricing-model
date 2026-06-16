@@ -10,7 +10,7 @@ Projeto PUBLICADO e ampliado para v1.1: https://github.com/pedrobraiti/capital-a
 (branch `main`). Além da replicação v1.0, adicionei dois estudos a pedido do usuário:
 (1) efeito-publicação estilo McLean-Pontiff (empirics/publication_effect.py) e (2) evidência
 internacional por região (empirics/international.py + french.regional_factors). 12 figuras, 15 testes
-pytest passando. Pipeline roda em segundos. Falta só commitar/pushar a v1.1 (em andamento).
+pytest passando. Pipeline roda em segundos. v1.1 commitada e pushada (commit 90c7af4). Entregue.
 
 ## Contexto mental
 Replicação empírica fiel do Fama & French (2004) + extensão out-of-sample pós-2003. Resultados-chave
