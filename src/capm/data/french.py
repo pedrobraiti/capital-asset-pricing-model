@@ -228,6 +228,32 @@ def industry_portfolios(n: int = 49, weighting: str = "VW") -> pd.DataFrame:
     return _select(f"{n}_Industry_Portfolios_CSV.zip", title_contains=_weight_title(weighting))
 
 
+# Kenneth French's international factor files (Bloomberg-derived). Developed
+# regions start 1990-07; emerging starts 1989-07 (sparse early on).
+REGION_ZIPS: dict[str, str] = {
+    "Developed": "Developed_3_Factors_CSV.zip",
+    "Developed ex-US": "Developed_ex_US_3_Factors_CSV.zip",
+    "North America": "North_America_3_Factors_CSV.zip",
+    "Europe": "Europe_3_Factors_CSV.zip",
+    "Japan": "Japan_3_Factors_CSV.zip",
+    "Asia Pacific ex-Japan": "Asia_Pacific_ex_Japan_3_Factors_CSV.zip",
+    "Emerging": "Emerging_5_Factors_CSV.zip",
+}
+
+
+def regional_factors(region: str) -> pd.DataFrame:
+    """International Mkt-RF, SMB, HML, RF (monthly, decimal) for a French region.
+
+    ``region`` must be a key of :data:`REGION_ZIPS`. Emerging markets come from
+    the 5-factor file; only the three shared factors are returned.
+    """
+    if region not in REGION_ZIPS:
+        raise ValueError(f"Unknown region {region!r}. Options: {list(REGION_ZIPS)}")
+    frame = _select(REGION_ZIPS[region], title_contains=None, freq="M")
+    keep = [c for c in ["Mkt-RF", "SMB", "HML", "RF"] if c in frame.columns]
+    return frame[keep]
+
+
 def slice_period(
     frame: pd.DataFrame | pd.Series, period: str
 ) -> pd.DataFrame | pd.Series:

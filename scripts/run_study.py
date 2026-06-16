@@ -23,7 +23,9 @@ from capm.empirics import (  # noqa: E402
     betting_against_beta,
     factor_premia,
     grs_panel,
+    international_premia,
     momentum_study,
+    publication_effect,
     security_market_line,
     sorted_decile_study,
 )
@@ -144,6 +146,41 @@ def main() -> None:
     bab_df = pd.DataFrame(bab_rows).set_index("period")
     bab_df.to_csv(TABLES / "bab_metrics.csv")
     lines.append(f"\n{bab_df.T.to_markdown()}\n")
+
+    # ---- Publication effect (McLean-Pontiff) ------------------------------ #
+    lines.append("\n## The publication effect (do anomalies decay after publication?)\n")
+    pe = publication_effect()
+    pe.to_csv(TABLES / "publication_effect.csv")
+    pe_show = pd.DataFrame({
+        "Seminal paper": pe["publication"],
+        "Pre %/yr": (pe["pre_mean_ann"] * PCT).round(2),
+        "Pre t": pe["pre_t"].round(2),
+        "Post %/yr": (pe["post_mean_ann"] * PCT).round(2),
+        "Post t": pe["post_t"].round(2),
+        "Decay %": pe["decay_pct"].round(0),
+    })
+    lines.append(f"\n{pe_show.to_markdown()}\n")
+    lines.append("\n*The three anomaly premiums fall 48-95% after publication; the market premium "
+                 "(control, never an anomaly) decays least and stays significant. Differences are "
+                 "economically large but, for single factors, not statistically significant given "
+                 "monthly volatility -- which is why McLean & Pontiff pool many anomalies for power.*\n")
+
+    # ---- International evidence -------------------------------------------- #
+    lines.append("\n## International evidence (is the fade global?)\n")
+    ip = international_premia()
+    ip.to_csv(TABLES / "international_premia.csv")
+    ip_show = pd.DataFrame({
+        "Start": ip["start"],
+        "HML full %/yr": (ip["HML_full_ann"].astype(float) * PCT).round(2),
+        "HML full t": ip["HML_full_t"].astype(float).round(2),
+        "HML 1990-2003 %/yr": (ip["HML_pre_ann"].astype(float) * PCT).round(2),
+        "HML 2004+ %/yr": (ip["HML_post_ann"].astype(float) * PCT).round(2),
+        "Mkt full %/yr": (ip["Mkt-RF_full_ann"].astype(float) * PCT).round(2),
+    })
+    lines.append(f"\n{ip_show.to_markdown()}\n")
+    lines.append("\n*The value premium is significant across regions over the full sample "
+                 "(confirming Fama-French 1998), but weakens after 2003 almost everywhere -- "
+                 "to zero in North America, while Japan and emerging markets keep more of it.*\n")
 
     (ROOT / "output" / "RESULTS.md").write_text("\n".join(lines), encoding="utf-8")
     print("Wrote tables to", TABLES)

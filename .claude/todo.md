@@ -23,3 +23,6 @@ versão internacional (Fama-French Developed); 4-fator BAB stock-level.
 - [x] Reporting (style + 10 charts) e pipeline (run_study.py, build_figures.py); figuras geradas em output/figures
 - [x] Testes pytest (13 testes: regressão/HAC, GRS, métricas, parser de dados) — todos passando
 - [x] README profissional em inglês com resultados, tabelas e 10 gráficos embutidos + referências
+- [x] v1.1: efeito-publicação (McLean-Pontiff) — decay 48-95% anomalias vs -32% controle (mercado)
+- [x] v1.1: evidência internacional — valor é global (FF1998) e some pós-2003 (NA→0, Japão/EM resistem)
+- [x] v1.1: 2 novos gráficos (11, 12), 2 novas seções README, 2 testes de integração (total 15 testes)

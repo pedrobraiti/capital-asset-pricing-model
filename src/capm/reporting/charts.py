@@ -18,7 +18,9 @@ from capm.empirics import (
     betting_against_beta,
     factor_premia,
     grs_panel,
+    international_premia,
     momentum_study,
+    publication_effect,
     security_market_line,
     sorted_decile_study,
 )
@@ -274,6 +276,59 @@ def fig_rolling_premia(figdir: Path) -> Path:
     return _save(fig, figdir, "10_rolling_premia.png")
 
 
+# --------------------------------------------------------------------------- #
+# 11. Publication effect (McLean-Pontiff): pre- vs post-publication premiums
+# --------------------------------------------------------------------------- #
+def fig_publication_effect(figdir: Path) -> Path:
+    pe = publication_effect()
+    names = list(pe.index)
+    x = np.arange(len(names))
+    w = 0.38
+    fig, ax = plt.subplots(figsize=(10, 5.6))
+    b1 = ax.bar(x - w / 2, pe["pre_mean_ann"] * 100, w, color=COLORS["navy"], label="Before publication")
+    b2 = ax.bar(x + w / 2, pe["post_mean_ann"] * 100, w, color=COLORS["orange"], label="After publication")
+    for rect, tv in zip(b1, pe["pre_t"]):
+        ax.annotate(f"t={tv:.1f}", (rect.get_x() + rect.get_width() / 2, rect.get_height()), ha="center", va="bottom", fontsize=8, color="#555")
+    for rect, tv in zip(b2, pe["post_t"]):
+        ax.annotate(f"t={tv:.1f}", (rect.get_x() + rect.get_width() / 2, rect.get_height()), ha="center", va="bottom", fontsize=8, color="#555")
+    top = (pe[["pre_mean_ann", "post_mean_ann"]].max(axis=1) * 100).to_numpy()
+    for xi, dec, ymax in zip(x, pe["decay_pct"], top):
+        ax.annotate(f"decay\n{dec:.0f}%", (xi, ymax + 1.4), ha="center", va="bottom",
+                    fontsize=9, fontweight="bold", color=COLORS["red"])
+    ax.axhline(0, color=COLORS["grey"], lw=1)
+    ax.set_ylim(top=top.max() + 3.5)
+    ax.set_xticks(x)
+    ax.set_xticklabels(names)
+    ax.set_ylabel("Annualized premium (%)")
+    ax.set_title("The publication effect: anomalies fade after they are published")
+    ax.legend(loc="upper left")
+    fig.text(0.01, -0.03, "Each factor split at its seminal publication year. The market premium (never an anomaly) is the control and barely decays.", fontsize=8, color=COLORS["grey"])
+    return _save(fig, figdir, "11_publication_effect.png")
+
+
+# --------------------------------------------------------------------------- #
+# 12. International value premium: pre- vs post-2003 by region
+# --------------------------------------------------------------------------- #
+def fig_international_value(figdir: Path) -> Path:
+    ip = international_premia()
+    regions = list(ip.index)
+    pre = ip["HML_pre_ann"].astype(float) * 100
+    post = ip["HML_post_ann"].astype(float) * 100
+    x = np.arange(len(regions))
+    w = 0.38
+    fig, ax = plt.subplots(figsize=(11, 5.8))
+    ax.bar(x - w / 2, pre, w, color=COLORS["navy"], label="1990-2003 (paper era)")
+    ax.bar(x + w / 2, post, w, color=COLORS["orange"], label="2004-present (out-of-sample)")
+    ax.axhline(0, color=COLORS["grey"], lw=1)
+    ax.set_xticks(x)
+    ax.set_xticklabels(regions, rotation=20, ha="right")
+    ax.set_ylabel("Value (HML) premium (% / year)")
+    ax.set_title("The value premium is global - and its post-2003 fade is global too (but uneven)")
+    ax.legend()
+    fig.text(0.01, -0.05, "International factors from the Ken French library (Bloomberg-derived, from 1990). North America fades to zero; Japan and emerging markets keep more.", fontsize=8, color=COLORS["grey"])
+    return _save(fig, figdir, "12_international_value.png")
+
+
 _FIGURES = [
     fig_efficient_frontier,
     fig_flat_sml,
@@ -285,6 +340,8 @@ _FIGURES = [
     fig_momentum_alphas,
     fig_bab,
     fig_rolling_premia,
+    fig_publication_effect,
+    fig_international_value,
 ]
 
 

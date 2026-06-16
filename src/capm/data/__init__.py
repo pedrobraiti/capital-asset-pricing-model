@@ -2,6 +2,7 @@
 
 from capm.data.french import (
     PERIODS,
+    REGION_ZIPS,
     factors,
     industry_portfolios,
     momentum_factor,
@@ -10,11 +11,13 @@ from capm.data.french import (
     portfolios_on_beta,
     portfolios_on_me,
     portfolios_on_momentum,
+    regional_factors,
     slice_period,
 )
 
 __all__ = [
     "PERIODS",
+    "REGION_ZIPS",
     "factors",
     "industry_portfolios",
     "momentum_factor",
@@ -23,5 +26,6 @@ __all__ = [
     "portfolios_on_beta",
     "portfolios_on_me",
     "portfolios_on_momentum",
+    "regional_factors",
     "slice_period",
 ]

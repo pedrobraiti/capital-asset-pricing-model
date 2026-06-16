@@ -2,7 +2,7 @@
 
 [![Python](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-13%20passing-brightgreen.svg)](tests/)
+[![Tests](https://img.shields.io/badge/tests-15%20passing-brightgreen.svg)](tests/)
 [![Data](https://img.shields.io/badge/data-Ken%20French%20Library-orange.svg)](https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/data_library.html)
 
 A rigorous, reproducible empirical study of the **Capital Asset Pricing Model (CAPM)** that
@@ -29,6 +29,12 @@ Library** — the same CRSP/Compustat-derived data the paper uses.
 - ⌛ **Out-of-sample (2004→today), the anomalies faded.** The size and value premiums have
   **collapsed to roughly zero** since the paper was published — a cautionary tale about data mining
   and crowded factors.
+- 📚 **It looks like a publication effect.** Splitting each factor at its seminal paper, the anomaly
+  premiums decay **48–95%** after publication while the market premium (the control) barely moves —
+  the McLean-Pontiff pattern, reproduced here.
+- 🌍 **The value premium is global — and so is its fade.** Value was significant across world markets
+  (confirming Fama-French 1998), but weakened nearly everywhere after 2003, **vanishing in North
+  America** while **Japan and emerging markets kept most of it.**
 - 🎯 **Betting Against Beta works, modestly.** The strategy implied by the flat SML — lever up low-beta,
   short high-beta — earns a **positive CAPM alpha (≈ 2.3%/yr) with a beta of ≈ 0**, exactly as the
   flat-SML evidence predicts.
@@ -50,7 +56,9 @@ Library** — the same CRSP/Compustat-derived data the paper uses.
   - [4. The GRS joint test: which model prices what?](#4-the-grs-joint-test-which-model-prices-what)
   - [5. Factor premiums and momentum](#5-factor-premiums-and-momentum)
   - [6. Out-of-sample: the anomalies faded](#6-out-of-sample-the-anomalies-faded)
-  - [7. Betting Against Beta](#7-betting-against-beta)
+  - [7. The publication effect (McLean-Pontiff)](#7-the-publication-effect-mclean-pontiff)
+  - [8. International evidence: is the fade global?](#8-international-evidence-is-the-fade-global)
+  - [9. Betting Against Beta](#9-betting-against-beta)
 - [Conclusions](#conclusions)
 - [Reproduce it](#reproduce-it)
 - [Project structure](#project-structure)
@@ -211,7 +219,55 @@ In the modern window the value *spread* even turns slightly **negative** (−1.2
 now *rejects the three-factor model itself* on B/M deciles. The lesson cuts in an unexpected direction:
 the empirical regularities that buried the CAPM are not immutable laws either.
 
-### 7. Betting Against Beta
+### 7. The publication effect (McLean-Pontiff)
+
+If the anomalies faded *because* they were published and then arbitraged, the decay should line up
+with publication dates — and the market premium, which was never an "anomaly", should be the control
+that *doesn't* fade. McLean & Pontiff (2016) document exactly this pattern across ~100 anomalies (a
+~58% post-publication decay). Splitting each factor at the year of its seminal paper reproduces it:
+
+![The publication effect](output/figures/11_publication_effect.png)
+
+| Factor | Seminal paper | Before %/yr (t) | After %/yr (t) | **Decay** |
+|---|---|---:|---:|---:|
+| Size (SMB) | Banz (1981) | 3.5 (t=2.3) | 0.2 (t=0.1) | **−95 %** |
+| Value (HML) | Rosenberg-Reid-Lanstein (1985) | 5.7 (t=3.3) | 2.1 (t=1.2) | **−64 %** |
+| Momentum (WML) | Jegadeesh-Titman (1993) | 8.8 (t=4.5) | 4.6 (t=1.6) | **−48 %** |
+| Market (control) | Sharpe (1964) — *not an anomaly* | 10.3 (t=2.9) | 7.0 (t=3.5) | −32 % |
+
+The three anomaly premiums fall **48–95 %** and lose statistical significance after publication; the
+market premium decays least and stays significant (t = 3.5). The average anomaly decay here (~69 %) is
+even larger than McLean & Pontiff's headline. **Honest caveat:** for *single* factors the pre-vs-post
+difference is not statistically significant given monthly volatility (Welch p ≈ 0.13–0.23) — which is
+precisely why McLean & Pontiff pool many anomalies to gain power. The point estimates, and the clean
+separation from the control, are the story.
+
+### 8. International evidence: is the fade global?
+
+Fama & French (1998) found the value premium in markets around the world — the paper cites this as
+evidence the anomalies are not a US data-mining artifact. Using French's international factor files
+(from 1990), the value premium is indeed significant across regions over the full sample. But splitting
+at 2003 shows the **post-publication fade is global too — though uneven**:
+
+![International value premium](output/figures/12_international_value.png)
+
+| Region (HML) | Full-sample %/yr (t) | 1990–2003 | **2004–present** |
+|---|---:|---:|---:|
+| Developed | 3.1 (t=2.1) | 6.6 | 1.1 |
+| Developed ex-US | 5.0 (t=3.7) | 7.1 | 3.7 |
+| North America | 1.8 (t=0.9) | 5.6 | **−0.5** |
+| Europe | 4.2 (t=2.8) | 7.6 | 2.1 |
+| Japan | 4.8 (t=2.6) | 5.2 | 4.5 |
+| Asia Pacific ex-Japan | 7.2 (t=4.1) | 10.6 | 5.1 |
+| Emerging | 7.7 (t=4.9) | 10.2 | 6.1 |
+
+Value was — and still is — a worldwide phenomenon, but it has weakened nearly everywhere since the
+paper, **collapsing to zero in North America** while **Japan and emerging markets retained most of it.**
+That cross-sectional pattern is itself informative: if the fade were pure data-mining noise it would be
+random across regions; instead it is strongest where markets are deepest and arbitrage capital is most
+abundant — consistent with the crowding interpretation.
+
+### 9. Betting Against Beta
 
 If the SML is too flat, there is money on the table: lever up the cheap low-beta assets and short the
 expensive high-beta ones, scaling each leg to a beta of one (Frazzini & Pedersen, 2014). Built from
@@ -239,11 +295,17 @@ mechanism rather than chase a Sharpe ratio.)*
    describe: the SML is too flat, and value/size/momentum carry returns beta cannot explain.
 2. **The three-factor model is a genuine improvement** — it prices the size and value sorts — **but it
    is not a panacea**: momentum and industries defeat it.
-3. **Out-of-sample, the anomalies decayed.** The most novel result here is that the size and value
-   premiums that doomed the CAPM have themselves shrunk to ~zero since 2004. Factor investing is not a
-   free lunch, and published edges erode.
-4. **The flat SML is tradeable** (Betting Against Beta), and its near-zero market beta is a clean
+3. **Out-of-sample, the anomalies decayed.** The size and value premiums that doomed the CAPM have
+   themselves shrunk to ~zero since 2004. Factor investing is not a free lunch, and published edges erode.
+4. **It really looks like a publication effect.** The decay tracks each factor's publication date, the
+   never-published market premium is the control that survives, and — across regions — the fade is
+   strongest where arbitrage capital is deepest (North America) and mildest where it is thinnest
+   (Japan, emerging markets). That is the crowding signature, not random noise.
+5. **The flat SML is tradeable** (Betting Against Beta), and its near-zero market beta is a clean
    internal consistency check on the whole exercise.
+
+This is a faithful replication plus an honest out-of-sample reckoning: the CAPM's failures are real and
+reproducible, *and* the factors that replaced it are not immutable laws either.
 
 The CAPM remains, as the authors put it, *"a theoretical tour de force"* — indispensable for teaching,
 unreliable for application.
@@ -285,8 +347,9 @@ src/capm/
   stats/       OLS with Newey-West HAC errors, the GRS test, Fama-MacBeth,
                and performance metrics (Sharpe, Sortino, drawdown, Calmar)
   empirics/    the studies: flat SML, value/size/momentum sorts, factor
-               premiums, the GRS panel, momentum, and Betting Against Beta
-  reporting/   matplotlib styling and the ten figures
+               premiums, the GRS panel, momentum, the publication effect,
+               international evidence, and Betting Against Beta
+  reporting/   matplotlib styling and the twelve figures
 scripts/
   run_study.py      run everything, write tables + RESULTS.md
   build_figures.py  render all figures
@@ -318,6 +381,12 @@ layer is independently testable and the financial logic is isolated from I/O and
   *Journal of Finance*, 48(1), 65–91.
 - Carhart, M. M. (1997). On Persistence in Mutual Fund Performance. *Journal of Finance*, 52(1), 57–82.
 - Frazzini, A., & Pedersen, L. H. (2014). Betting Against Beta. *Journal of Financial Economics*, 111(1).
+- Fama, E. F., & French, K. R. (1998). Value versus Growth: The International Evidence.
+  *Journal of Finance*, 53(6), 1975–1999.
+- McLean, R. D., & Pontiff, J. (2016). Does Academic Research Destroy Stock Return Predictability?
+  *Journal of Finance*, 71(1), 5–32. *(the publication-effect benchmark)*
+- Banz, R. W. (1981). The Relationship Between Return and Market Value of Common Stocks.
+  *Journal of Financial Economics*, 9(1), 3–18.
 - Newey, W. K., & West, K. D. (1987). A Simple, Positive Semi-Definite, Heteroskedasticity and
   Autocorrelation Consistent Covariance Matrix. *Econometrica*, 55(3), 703–708.
 - **Data:** Kenneth R. French Data Library —

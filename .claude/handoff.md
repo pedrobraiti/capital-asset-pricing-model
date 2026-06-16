@@ -3,14 +3,14 @@
 > **Propósito:** este arquivo serve para que um chat NOVO saiba com precisão "de onde eu parei".
 > É o PRIMEIRO arquivo que a próxima sessão lê.
 
-**Última atualização:** 2026-06-16 — estudo concluído e PUBLICADO (v1.0).
+**Última atualização:** 2026-06-16 — v1.1 (efeito-publicação + internacional) concluída.
 
 ## Onde parei
-O estudo está COMPLETO, funcionando ponta a ponta, e PUBLICADO no GitHub (público):
-https://github.com/pedrobraiti/capital-asset-pricing-model (branch padrão `main`, topics adicionados).
-Pipeline roda em segundos: `pytest -q` (13 testes OK), `python scripts/run_study.py`
-(tabelas + output/RESULTS.md), `python scripts/build_figures.py` (10 figuras). README profissional
-em inglês com resultados reais, tabelas e gráficos embutidos. Nada pendente — projeto entregue.
+Projeto PUBLICADO e ampliado para v1.1: https://github.com/pedrobraiti/capital-asset-pricing-model
+(branch `main`). Além da replicação v1.0, adicionei dois estudos a pedido do usuário:
+(1) efeito-publicação estilo McLean-Pontiff (empirics/publication_effect.py) e (2) evidência
+internacional por região (empirics/international.py + french.regional_factors). 12 figuras, 15 testes
+pytest passando. Pipeline roda em segundos. Falta só commitar/pushar a v1.1 (em andamento).
 
 ## Contexto mental
 Replicação empírica fiel do Fama & French (2004) + extensão out-of-sample pós-2003. Resultados-chave
