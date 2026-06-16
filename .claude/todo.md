@@ -3,11 +3,9 @@
 Plano vivo do projeto. Tarefas e subtarefas, marcadas conforme concluídas.
 
 ## Em progresso
-- [ ] Scaffold inicial (.claude, config, git)
+- [ ] Máquina estatística (OLS Newey-West, GRS, Fama-MacBeth, métricas)
 
 ## Próximas
-- [ ] Data loader da biblioteca Ken French (download + cache parquet)
-- [ ] Máquina estatística (OLS Newey-West, GRS, Fama-MacBeth, métricas)
 - [ ] Módulos empíricos (SML achatada, valor, tamanho, alfas+GRS, 3 fatores, momentum, BAB)
 - [ ] Reporting (charts) + pipeline (run_study.py)
 - [ ] Testes pytest
@@ -18,3 +16,4 @@ Plano vivo do projeto. Tarefas e subtarefas, marcadas conforme concluídas.
 - [x] Varrer projeto de referência (volume-profile-trading)
 - [x] Confirmar fonte de dados (Ken French) e acesso de rede
 - [x] Setup inicial do projeto
+- [x] Data loader da biblioteca Ken French (download + cache, parser robusto, deciles D1..D10)
