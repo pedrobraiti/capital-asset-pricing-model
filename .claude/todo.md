@@ -3,13 +3,10 @@
 Plano vivo do projeto. Tarefas e subtarefas, marcadas conforme concluídas.
 
 ## Em progresso
-- [ ] README profissional com resultados/gráficos + publicar no GitHub
+- [ ] Publicar repositório público no GitHub e push
 
 ## Próximas
-- [ ] Módulos empíricos (SML achatada, valor, tamanho, alfas+GRS, 3 fatores, momentum, BAB)
-- [ ] Reporting (charts) + pipeline (run_study.py)
-- [ ] Testes pytest
-- [ ] Rodar estudo, README profissional com resultados/gráficos, publicar no GitHub
+<vazio — estudo concluído (v1.0)>
 
 ## Concluído
 - [x] Ler o paper Fama & French (2004)
@@ -23,3 +20,4 @@ Plano vivo do projeto. Tarefas e subtarefas, marcadas conforme concluídas.
   validados: FM slope -0.65% t=-0.16; premia t-stats batem com o paper (3.55/2.08/3.79); SMB/HML somem pós-2003; BAB alpha +2.3% t=1.9
 - [x] Reporting (style + 10 charts) e pipeline (run_study.py, build_figures.py); figuras geradas em output/figures
 - [x] Testes pytest (13 testes: regressão/HAC, GRS, métricas, parser de dados) — todos passando
+- [x] README profissional em inglês com resultados, tabelas e 10 gráficos embutidos + referências

@@ -1,37 +1,35 @@
 # Handoff — de onde parei
 
-> **Propósito:** este arquivo serve para que um chat NOVO saiba com precisão "de onde eu parei",
-> de forma relativamente detalhada. É o PRIMEIRO arquivo que a próxima sessão lê.
+> **Propósito:** este arquivo serve para que um chat NOVO saiba com precisão "de onde eu parei".
+> É o PRIMEIRO arquivo que a próxima sessão lê.
 
-**Última atualização:** 2026-06-16 — durante o setup inicial.
+**Última atualização:** 2026-06-16 — estudo concluído (v1.0), pronto para publicar no GitHub.
 
 ## Onde parei
-Acabei de ler o paper Fama & French (2004) por inteiro (extraído para texto via pypdf), varri o
-projeto de referência `volume-profile-trading` para igualar o padrão de qualidade, e confirmei a
-fonte de dados (Kenneth R. French Data Library, acesso de rede testado e funcionando — dados de
-192607 até 202604). Estou montando o scaffold inicial (.claude, config, git).
+O estudo está COMPLETO e funcionando ponta a ponta. Toda a pipeline roda em segundos:
+`pytest -q` (13 testes OK), `python scripts/run_study.py` (tabelas + output/RESULTS.md),
+`python scripts/build_figures.py` (10 figuras em output/figures). README profissional em inglês
+escrito com resultados reais, tabelas e gráficos embutidos. Último passo em andamento: publicar o
+repositório público no GitHub como `capital-asset-pricing-model` e dar push.
 
 ## Contexto mental
-O paper é de TESTES EMPÍRICOS do CAPM, não uma estratégia de trading. Logo o "backtest extenso"
-fiel é uma replicação empírica: SML achatada (Fig. 2), efeito valor B/M (Fig. 3), efeito tamanho,
-alfa de Jensen + teste conjunto GRS, regressões Fama-MacBeth, prêmios do modelo de 3 fatores e
-momentum. Estendo tudo out-of-sample pós-2003. Adiciono um backtest tradeável "Betting Against
-Beta" (a estratégia implicada pela SML achatada) para dar o sabor de estratégia do projeto de ref.
-
-Usuário escolheu: README/docs em INGLÊS; período = replicação do paper + extensão até hoje.
+Replicação empírica fiel do Fama & French (2004) + extensão out-of-sample pós-2003. Resultados-chave
+(todos reproduzem o paper): SML achatada (FM slope -0.65% t=-0.16 vs CAPM +5.65%); alfa de valor
++8.2%/yr (t=2.9); GRS rejeita CAPM em quase tudo, FF3 salva size/value mas quebra em momentum;
+prêmios 1927-2003 batem com o paper (t-stats 3.55/2.08/3.79); SMB e HML SOMEM pós-2003 (achado
+próprio mais interessante); BAB com alpha +2.3%/yr e beta ~0. Dados do Ken French (cache local).
 
 ## Próximo passo concreto
-Terminar o scaffold (README skeleton, CLAUDE.md, LICENSE — já criados config/.claude), `git init`,
-commit inicial, e então construir `src/capm/data/` (loader Ken French com cache parquet).
+Se ainda não publicado: `gh repo create capital-asset-pricing-model --public --source=. --remote=origin --push`.
+Confirmar que as figuras renderizam no README do GitHub (caminhos relativos output/figures/*.png).
 
 ## Em aberto / armadilhas
-- A biblioteca do French NÃO tem decis pré-ordenados por beta diretamente; a SML achatada (Fig. 2)
-  será construída via cross-section de muitos portfólios decis (size, B/M, momentum) + estimação de
-  beta full-sample, que É o teste cross-section do paper. Verificar se existe dataset de beta deciles.
-- Formato dos CSVs do French tem cabeçalho/rodapé e múltiplas seções (monthly/annual) — parsing cuidadoso.
-- Datas no formato YYYYMM (mensal) e YYYY (anual). Valores em PERCENTUAL (dividir por 100).
+- Cache em data/cache é git-ignored (reproduzível). Figuras e tabelas em output/ SÃO versionadas
+  (necessário para o README renderizar no GitHub). paper_text.txt é git-ignored.
+- Pequenas diferenças nos pontos dos prêmios vs paper são revisões de dados CRSP desde 2004 (t-stats batem).
+- Parser do French: cuidado com normalização de newline no Windows (já resolvido em french._raw_text).
 
 ## Como retomar rápido
-- Paper em texto: `paper_text.txt` (ignorado no git) e PDF `JEP.FamaandFrench.pdf`.
-- venv já criado: `& ".venv\Scripts\Activate.ps1"`.
-- Projeto de referência: `C:\Users\ACS Gamer\Documents\vscode-local\trading-BaTe-Claude\volume-profile-trading`.
+- venv: `& ".venv\Scripts\Activate.ps1"`. `pytest -q` deve dar 13 passing.
+- Resultados: output/RESULTS.md e output/tables/*.csv. Figuras: output/figures/.
+- Paper: JEP.FamaandFrench.pdf (e paper_text.txt extraído, git-ignored).
