@@ -1,0 +1,6 @@
+sort,period,spread,mean %/yr,CAPM alpha %/yr,alpha t,spread beta
+Book-to-Market (value),paper_1963_2003,D10-D1,7.75,8.18,2.86,-0.08
+Size,paper_1963_2003,D1-D10,4.74,3.89,1.23,0.15
+Momentum,paper_1963_2003,D10-D1,19.25,20.14,6.36,-0.16
+Book-to-Market (value),modern_2004_now,D10-D1,-1.18,-5.39,-1.14,0.43
+Size,modern_2004_now,D1-D10,-2.53,-4.55,-1.59,0.2
