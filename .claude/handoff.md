@@ -3,14 +3,14 @@
 > **Propósito:** este arquivo serve para que um chat NOVO saiba com precisão "de onde eu parei".
 > É o PRIMEIRO arquivo que a próxima sessão lê.
 
-**Última atualização:** 2026-06-16 — estudo concluído (v1.0), pronto para publicar no GitHub.
+**Última atualização:** 2026-06-16 — estudo concluído e PUBLICADO (v1.0).
 
 ## Onde parei
-O estudo está COMPLETO e funcionando ponta a ponta. Toda a pipeline roda em segundos:
-`pytest -q` (13 testes OK), `python scripts/run_study.py` (tabelas + output/RESULTS.md),
-`python scripts/build_figures.py` (10 figuras em output/figures). README profissional em inglês
-escrito com resultados reais, tabelas e gráficos embutidos. Último passo em andamento: publicar o
-repositório público no GitHub como `capital-asset-pricing-model` e dar push.
+O estudo está COMPLETO, funcionando ponta a ponta, e PUBLICADO no GitHub (público):
+https://github.com/pedrobraiti/capital-asset-pricing-model (branch padrão `main`, topics adicionados).
+Pipeline roda em segundos: `pytest -q` (13 testes OK), `python scripts/run_study.py`
+(tabelas + output/RESULTS.md), `python scripts/build_figures.py` (10 figuras). README profissional
+em inglês com resultados reais, tabelas e gráficos embutidos. Nada pendente — projeto entregue.
 
 ## Contexto mental
 Replicação empírica fiel do Fama & French (2004) + extensão out-of-sample pós-2003. Resultados-chave

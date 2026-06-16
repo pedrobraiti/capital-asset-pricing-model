@@ -3,10 +3,12 @@
 Plano vivo do projeto. Tarefas e subtarefas, marcadas conforme concluídas.
 
 ## Em progresso
-- [ ] Publicar repositório público no GitHub e push
+<nada — v1.0 publicado>
 
 ## Próximas
 <vazio — estudo concluído (v1.0)>
+Ideias futuras (opcional): 5x5 size×B/M heatmap de alfas; bootstrap CIs nos prêmios;
+versão internacional (Fama-French Developed); 4-fator BAB stock-level.
 
 ## Concluído
 - [x] Ler o paper Fama & French (2004)
