@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "capm-study"
+version = "1.0.0"
+description = "Empirical replication and out-of-sample extension of Fama & French (2004), 'The Capital Asset Pricing Model: Theory and Evidence'."
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Pedro Braiti" }]
+dependencies = [
+    "pandas>=2.2",
+    "numpy>=2.1",
+    "scipy>=1.14",
+    "matplotlib>=3.9",
+    "pyarrow>=18.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
