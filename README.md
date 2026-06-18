@@ -19,23 +19,23 @@ Library** — the same CRSP/Compustat-derived data the paper uses.
 
 ## TL;DR — what the data says
 
-- 📉 **The Security Market Line is too flat.** Across beta-sorted portfolios, the cross-sectional
+-  **The Security Market Line is too flat.** Across beta-sorted portfolios, the cross-sectional
   reward for beta is essentially zero (Fama-MacBeth slope **−0.6%/yr, t = −0.16**) when the CAPM
   predicts **+5.6%/yr**. Low-beta stocks earn *more* than the model says; high-beta stocks earn *less*.
-- 💎 **Value and size beat the CAPM.** Over 1963–2003 the value spread (high minus low book-to-market)
+-  **Value and size beat the CAPM.** Over 1963–2003 the value spread (high minus low book-to-market)
   earned **7.8%/yr with a CAPM alpha of 8.2% (t = 2.9)** — return the market factor cannot explain.
-- 🧪 **The CAPM is statistically rejected almost everywhere** (Gibbons-Ross-Shanken joint test). The
+-  **The CAPM is statistically rejected almost everywhere** (Gibbons-Ross-Shanken joint test). The
   **three-factor model rescues the size/value sorts**, but is itself **broken by momentum**.
-- ⌛ **Out-of-sample (2004→today), the anomalies faded.** The size and value premiums have
+-  **Out-of-sample (2004→today), the anomalies faded.** The size and value premiums have
   **collapsed to roughly zero** since the paper was published — a cautionary tale about data mining
   and crowded factors.
-- 📚 **It looks like a publication effect.** Splitting each factor at its seminal paper, the anomaly
+-  **It looks like a publication effect.** Splitting each factor at its seminal paper, the anomaly
   premiums decay **48–95%** after publication while the market premium (the control) barely moves —
   the McLean-Pontiff pattern, reproduced here.
-- 🌍 **The value premium is global — and so is its fade.** Value was significant across world markets
+-  **The value premium is global — and so is its fade.** Value was significant across world markets
   (confirming Fama-French 1998), but weakened nearly everywhere after 2003, **vanishing in North
   America** while **Japan and emerging markets kept most of it.**
-- 🎯 **Betting Against Beta works, modestly.** The strategy implied by the flat SML — lever up low-beta,
+-  **Betting Against Beta works, modestly.** The strategy implied by the flat SML — lever up low-beta,
   short high-beta — earns a **positive CAPM alpha (≈ 2.3%/yr) with a beta of ≈ 0**, exactly as the
   flat-SML evidence predicts.
 
